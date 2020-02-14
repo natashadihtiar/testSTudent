@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+ 
+<body>
+    <script>
+        class Student {
+            constructor(firstName, lastName, year) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.year = year;
+                this.marks = new Array(30);
+                this.presence = new Array(30);
+                this.current = 0;
+          
+            this.age = function() {
+                return new Date().getFullYear() - this.year;
+            }
+ 
+            this.averageMark = function() {
+                let count = 0;
+                let sum = this.marks.reduce((a, b) => { ++count; return a + b; }, 0);
+                return  sum / count;
+            }
+
+            this.averagePresence = function() {
+                let count = 0;
+                let sum = this.presence.reduce((a, b) => { ++count; return a + b; }, 0);
+                return  sum / count;
+            }
+
+             this.mark = function(mark){
+                this.marks[this.current++] = mark;
+                
+            }
+
+            this.present = function() {
+                               
+                this.presence[this.current++] = true;
+            }
+
+            this.absent = function() {
+               
+                this.presence[this.current++] = false;
+            }
+
+            this.summary = function(){
+                if(this.averageMark()>=9 && this.averagePresence()<0.9)
+                return "Ути какой молодчинка!";
+                else if (this.averageMark()<9 && this.averagePresence()>0.9)
+                return "Редиска!";
+            }
+        }
+    }
+        let student = new Student("Petr", "Petrovich", 1998);
+        console.log(student.age());
+ 
+        student.present();
+        student.present();
+        student.absent();
+        student.present();
+                
+        student.mark(10);
+        student.mark(8);
+       
+        console.log(student.averageMark());
+        console.log(student.summary());
+        
+    </script>
+</body>
+</html>
